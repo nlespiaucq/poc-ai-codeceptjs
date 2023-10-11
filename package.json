@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "def": "codeceptjs def",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "codeceptjs": "3.5.0",
+    "playwright": "1.35.1",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  }
+}
