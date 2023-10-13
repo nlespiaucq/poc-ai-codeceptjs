@@ -28,9 +28,23 @@ Scenario("Give me the page-object", async ({ I }) => {
   //     minify: false,
   //   },
 
-  I.amOnPage("https://getbootstrap.com/docs/5.1/examples/checkout/");
-  const response = await I.askGptOnPage(
-    "Act as QA automation engineer, give me the page-object model of this page in TypeScript language that can be integrated with CodeceptJS framework"
+  I.amOnPage("https://www.betclic.fr/");
+  I.waitForText("Continuer sans accepter", 30);
+  I.click("Continuer sans accepter");
+  I.click('//*[@data-qa="commonSignInButton"]');
+
+  await I.askGptOnPageFragment(
+    `Act as customer, what is this page about?`,
+    '//div[@class="container_content"]'
   );
-  console.log(response);
+
+  await I.askGptOnPageFragment(
+    `Act as QA automation engineer.
+    Give me the page-object model of this page in TypeScript language.
+    It should be integrated with CodeceptJS framework.
+    Prefer consistent functional methods rather than single-action ones (ex: fill the form in one method rather than x methods).
+    All codeceptjs helper methods should be asynchronous.
+    Locators should be private and functions public`,
+    '//div[@class="container_content"]'
+  );
 });
